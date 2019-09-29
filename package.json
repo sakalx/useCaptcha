@@ -1,0 +1,90 @@
+{
+  "name": "usecaptcha",
+  "version": "1.0.0",
+  "description": "React hook for Google reCAPTCHA v2.",
+  "main": "dist/",
+  "browserslist": [
+    "> 1%",
+    "ie >= 11",
+    "not op_mini all"
+  ],
+  "babel": {
+    "presets": [
+      [
+        "@babel/env",
+        {
+          "targets": {
+            "browsers": [
+              "> 1%",
+              "ie >= 11",
+              "not op_mini all"
+            ]
+          }
+        }
+      ],
+      "@babel/react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/transform-runtime"
+    ]
+  },
+  "postcss": {
+    "plugins": {
+      "postcss-preset-env": {},
+      "cssnano": {
+        "safe": true
+      }
+    }
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "start": "webpack-dev-server --mode development",
+    "build-package": "npm run clean && npm run transpile-css && npm run transpile-js",
+    "build-example": "webpack --mode production",
+    "deploy": "gh-pages -d example/dist",
+    "publish-npm": "npm run build-package && npm publish",
+    "publish-git": "npm run build-package && npm run build-example && npm run deploy",
+    "transpile-css": "postcss src/style.css --no-map --output=dist/style.css",
+    "transpile-js": "babel src/**/*.js -d dist --copy-files"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+  ],
+  "author": "Sakal Serhii",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "peerDependencies": {
+    "react": "16.8.6",
+    "react-dom": "16.8.6"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.4.3",
+    "@babel/core": "7.4.3",
+    "@babel/plugin-proposal-class-properties": "7.4.0",
+    "@babel/plugin-transform-runtime": "7.4.3",
+    "@babel/preset-env": "7.4.3",
+    "@babel/preset-react": "7.0.0",
+    "@babel/runtime": "7.4.3",
+    "babel-loader": "8.0.5",
+    "css-loader": "2.1.1",
+    "cssnano": "4.1.10",
+    "extract-text-webpack-plugin": "^4.0.0-alpha.0",
+    "gh-pages": "2.0.1",
+    "html-webpack-plugin": "3.2.0",
+    "postcss-cli": "6.1.2",
+    "postcss-preset-env": "6.6.0",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "style-loader": "0.23.1",
+    "webpack": "^4.19.1",
+    "webpack-cli": "3.3.0",
+    "webpack-dev-server": "3.3.0"
+  }
+}
