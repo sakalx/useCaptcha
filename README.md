@@ -2,11 +2,15 @@
 
 reCAPTCHA protects you against spam and other types of automated abuse. Here, we explain how to add reCAPTCHA to your React APP.
  ________________________________________________________
+
 React hook for [Google reCAPTCHA v2.](https://developers.google.com/recaptcha/intro)
 
 To get `sitekey` you need [Register a new site](https://www.google.com/recaptcha/admin/create)
 
+________________________________________________________
+________________________________________________________
 ### Example [Checkbox reCAPTCHA](https://developers.google.com/recaptcha/docs/display)
+
 ```javascript
 import React from 'react';
 import useCaptcha from 'usecaptcha';
@@ -27,10 +31,10 @@ const App = () => {
     )
 }
 ```
-
 ________________________________________________________
-
+________________________________________________________
 ### Example [Invisible reCAPTCHA](https://developers.google.com/recaptcha/docs/invisible)
+
 ```javascript
 import React from 'react';
 import useCaptcha from 'usecaptcha';
@@ -54,10 +58,10 @@ const App = () => {
     )
 }
 ```
-
 ________________________________________________________
-
+________________________________________________________
 ### Example with options:
+
 ```javascript
 import React from 'react';
 import useCaptcha from 'usecaptcha';
@@ -83,9 +87,11 @@ const App = () => {
     )
 }
 ```
-
 ________________________________________________________
 
+ [DEMO](https://sakalx.github.io/useCaptcha/)
+________________________________________________________
+________________________________________________________
 #### options
 | Name | Value | Description |
 | --- | --- | --- |
@@ -97,7 +103,8 @@ ________________________________________________________
 | **errorCallback** | [`function`] | Optional. The callback function, executed when reCAPTCHA encounters an error (usually network connectivity) and cannot continue until connectivity is restored. If you specify a function here, you are responsible for informing the user that they should retry. |
  
  ________________________________________________________
-
+ ________________________________________________________
 #### Server Side Validation
 [Verifying response](https://developers.google.com/recaptcha/docs/verify#api_request)
-
+________________________________________________________
+________________________________________________________
