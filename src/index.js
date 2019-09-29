@@ -17,7 +17,7 @@ const useCaptcha = (sitekey, options = {}) => {
     captchaRef.current.style.MozTransition = 'height .278s';
   };
 
-  const runCaptcha = () => {
+  const execute = () => {
     setToken('');
 
     options.size === 'invisible'
@@ -61,7 +61,7 @@ const useCaptcha = (sitekey, options = {}) => {
     }, 824);
   };
 
-  return [captchaRef, runCaptcha, token, captchaId];
+  return [captchaRef, execute, token, captchaId];
 };
 
 const injectGoogleApi = () => {
