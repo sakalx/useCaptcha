@@ -1,0 +1,48 @@
+h1 {
+  color: #2196f3;
+  font-size: 18px;
+}
+
+code {
+  color: #f50057;
+  display: block;
+  margin: 16px 0;
+  overflow-wrap: break-word;
+}
+
+button {
+  background: rgba(255, 255, 255, .2);
+  border-radius: 6px;
+  color: #ee7600;
+  cursor: pointer;
+  font-size: 10px;
+  margin: 16px 0;
+  outline: none;
+  padding: 6px 8px;
+  transition: all .174s linear;
+  transition-property: color, background;
+}
+
+button:hover {
+  background: #ee7600;
+  color: #fff;
+}
+
+section {
+  max-width: 400px;
+  width: 100%;
+  border-radius: 6px;
+  flex: 0 1 400px;
+  padding: 16px;
+  margin: 21px;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.dark {
+  background: #424242;
+}

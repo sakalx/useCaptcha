@@ -3,7 +3,7 @@ import {useLayoutEffect, useRef, useState} from 'react';
 const useCaptcha = (sitekey, options = {}) => {
   const captchaRef = useRef(null);
   const captchaId = useRef(0);
-  const [token, setToken] = useState('');
+  const [response, setResponse] = useState('');
 
   useLayoutEffect(() => {
     addBaseCss();
@@ -18,7 +18,7 @@ const useCaptcha = (sitekey, options = {}) => {
   };
 
   const execute = () => {
-    setToken('');
+    setResponse('');
 
     options.size === 'invisible'
         ? grecaptcha.execute(captchaId.current)
@@ -35,9 +35,9 @@ const useCaptcha = (sitekey, options = {}) => {
     }, 378);
   };
 
-  const callback = token => {
-    if (options.captchaCallback) options.captchaCallback(token);
-    setToken(token);
+  const callback = response => {
+    if (options.captchaCallback) options.captchaCallback(response);
+    setResponse(response);
     options.size !== 'invisible' && hideCaptcha();
     setTimeout(() => grecaptcha.reset(captchaId.current), 524);
   };
@@ -61,7 +61,7 @@ const useCaptcha = (sitekey, options = {}) => {
     }, 824);
   };
 
-  return [captchaRef, execute, token, captchaId];
+  return [captchaRef, execute, response, captchaId];
 };
 
 const injectGoogleApi = () => {

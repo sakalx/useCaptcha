@@ -64,7 +64,7 @@
   "bugs": {
     "url": "https://github.com/sakalx/useCaptcha/issues"
   },
-  "homepage": " https://sakalx.github.io/usecaptcha",
+  "homepage": "https://sakalx.github.io/useCaptcha",
   "peerDependencies": {
     "react": "16.10.1",
     "react-dom": "16.10.1"
