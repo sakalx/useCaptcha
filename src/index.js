@@ -30,16 +30,15 @@ const useCaptcha = (sitekey, options = {}) => {
   };
 
   const hideCaptcha = () => {
-    setTimeout(() => {
-      captchaRef.current.style.height = '0px';
-    }, 378);
+    captchaRef.current.style.height = '0px';
   };
 
   const captchaCallback = response => {
-    if (options.callback) options.callback(response);
-    setResponse(response);
     options.size !== 'invisible' && hideCaptcha();
-    setTimeout(() => grecaptcha.reset(captchaId.current), 524);
+    grecaptcha.reset(captchaId.current);
+    setResponse(response);
+
+    if (options.callback) options.callback(response);
   };
 
   const renderCaptcha = () => {
