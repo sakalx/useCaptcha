@@ -9,7 +9,7 @@ const sitekey = '6Lft57oUAAAAAIrd2RBVoHO3WwGGdn0A42aQ6ozZ';
 
 const Captcha = () => {
   const [captchaRef, execute, response] = useCaptcha(sitekey);
-  const [captchaRefCompact, executeCompact, responseCompact] = useCaptcha(sitekey, {size: 'compact'});
+  const [captchaRefCompact, executeCompact, responseCompact] = useCaptcha(sitekey, {size: 'compact', language: 'ja'});
   const [captchaRefDark, executeDark, responseDark] = useCaptcha(sitekey, {theme: 'dark'});
   const [captchaRefCompactDark, executeCompactDark, responseCompactDark] = useCaptcha(sitekey, {size: 'compact', theme: 'dark'});
   const [captchaRefInvisible, executeInvisible, responseInvisible] = useCaptcha(sitekey, {size: 'invisible'});
@@ -27,7 +27,7 @@ const Captcha = () => {
           </section>
 
           <section>
-            <h1>Checkbox Compact reCAPTCHA</h1>
+            <h1>Checkbox Compact Japanese reCAPTCHA</h1>
             <button onClick={executeCompact}>EXECUTE</button>
             {responseCompact && (
                 <code>Response : {responseCompact}</code>

@@ -35,8 +35,8 @@ const useCaptcha = (sitekey, options = {}) => {
     }, 378);
   };
 
-  const callback = response => {
-    if (options.captchaCallback) options.captchaCallback(response);
+  const captchaCallback = response => {
+    if (options.callback) options.callback(response);
     setResponse(response);
     options.size !== 'invisible' && hideCaptcha();
     setTimeout(() => grecaptcha.reset(captchaId.current), 524);
@@ -52,7 +52,8 @@ const useCaptcha = (sitekey, options = {}) => {
           'badge': options.badge || '',
           'theme': options.theme || '',
           'size': options.size || '',
-          'callback': callback,
+          'hl': options.language || '',
+          'callback': captchaCallback,
           'expired-callback': options.expiredCallback || null,
           'error-callback': options.errorCallback || null,
         });

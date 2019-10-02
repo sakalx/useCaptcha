@@ -96,8 +96,9 @@ ________________________________________________________
 | Name | Value | Description |
 | --- | --- | --- |
 | **badge** | [`bottomright`,`bottomleft`,`inline`] | Optional for invisible reCAPTCHA. Reposition the reCAPTCHA badge. 'inline' lets you position it with CSS. |
-| **size** | [`invisible`,`compact `,`normal`] | Optional. Used to create an invisible widget bound to a div and programmatically executed, or the size of the reCAPTCHA checkbox. |
 | **theme** | [`dark`,`light`] | Optional. The color theme of the widget. |
+| **size** | [`invisible`,`compact `,`normal`] | Optional. Used to create an invisible widget bound to a div and programmatically executed, or the size of the reCAPTCHA checkbox. |
+| **language** | [[`Language Codes`](https://developers.google.com/recaptcha/docs/language)] | Optional. Forces the widget to render in a specific language. Auto-detects the user's language if unspecified. See [language codes](https://developers.google.com/recaptcha/docs/language) |
 | **callback** | [`function`] | Optional. The callback function, executed when the user submits a successful response. The response token is passed to your callback. |
 | **expiredCallback** | [`function`] | Optional. The callback function, executed when the reCAPTCHA response expires and the user needs to re-verify. |
 | **errorCallback** | [`function`] | Optional. The callback function, executed when reCAPTCHA encounters an error (usually network connectivity) and cannot continue until connectivity is restored. If you specify a function here, you are responsible for informing the user that they should retry. |
