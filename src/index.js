@@ -1,77 +1,58 @@
-import {useLayoutEffect, useRef, useState} from 'react';
+import {useRef, useState, useCallback, useLayoutEffect} from 'react';
+
+import getCaptchaOptions from './__core__/utils/reCaptcha/getCaptchaOptions';
+import getRecaptchaHost from './__core__/API/getReCaptchaHost';
+import initBaseCss from './__core__/utils/reCaptcha/initBaseCss';
+import injectScript from './__core__/utils/generic/injectScript';
+import {hideCaptcha, showCaptcha} from './__core__/utils/reCaptcha/toggleCaptcha';
 
 const useCaptcha = (sitekey, options = {}) => {
-  const captchaRef = useRef(null);
-  const captchaId = useRef(0);
-  const [response, setResponse] = useState('');
+    const captchaRef = useRef(null);
+    const captchaId = useRef(0);
 
-  useLayoutEffect(() => {
-    addBaseCss();
-    renderCaptcha();
-  }, []);
+    const [response, setResponse] = useState('');
 
-  const addBaseCss = () => {
-    captchaRef.current.style.height = '0px';
-    captchaRef.current.style.overflow = 'hidden';
-    captchaRef.current.style.webkitTransition = 'height .278s';
-    captchaRef.current.style.MozTransition = 'height .278s';
-  };
+    useLayoutEffect(() => {
+        initBaseCss(captchaRef);
+        initCaptcha();
+    }, []);
 
-  const execute = () => {
-    setResponse('');
+    const execute = useCallback(() => {
+        const size = options.size;
+        const isInvisibleSize = size === 'invisible';
 
-    options.size === 'invisible'
-        ? grecaptcha.execute(captchaId.current)
-        : showCaptcha();
-  };
+        setResponse('');
+        isInvisibleSize
+            ? grecaptcha.execute(captchaId.current)
+            : showCaptcha(captchaRef, size);
+    }, [options.size]);
 
-  const showCaptcha = () => {
-    captchaRef.current.style.height = options.size === 'compact' ? '140px' : '80px';
-  };
 
-  const hideCaptcha = () => {
-    captchaRef.current.style.height = '0px';
-  };
+    const callback = useCallback(response => {
+        options.size !== 'invisible' && hideCaptcha(captchaRef);
+        grecaptcha.reset(captchaId.current);
+        setResponse(response);
 
-  const captchaCallback = response => {
-    options.size !== 'invisible' && hideCaptcha();
-    grecaptcha.reset(captchaId.current);
-    setResponse(response);
+        if (typeof options.callback === 'function') options.callback(response);
+    }, [options.size, String(options.callback)]);
 
-    if (options.callback) options.callback(response);
-  };
+    const initCaptcha = () => {
+        const src = getRecaptchaHost(options.globally)
+        if (typeof grecaptcha === 'undefined') injectScript(src);
 
-  const renderCaptcha = () => {
-    if (typeof grecaptcha === 'undefined') injectGoogleApi();
+        const renderCaptcha = () => {
+            if (typeof grecaptcha !== 'undefined' && grecaptcha.render) {
+                const captchaOptions = getCaptchaOptions(sitekey, {...options, callback});
 
-    const timerId = setInterval(() => {
-      if (typeof grecaptcha !== 'undefined' && grecaptcha.render) {
-        captchaId.current = grecaptcha.render(captchaRef.current, {
-          'sitekey': sitekey,
-          'badge': options.badge || '',
-          'theme': options.theme || '',
-          'size': options.size || '',
-          'hl': options.language || '',
-          'callback': captchaCallback,
-          'expired-callback': options.expiredCallback || null,
-          'error-callback': options.errorCallback || null,
-        });
-        clearInterval(timerId);
-      }
-    }, 824);
-  };
+                captchaId.current = grecaptcha.render(captchaRef.current, captchaOptions);
+                clearInterval(timerId);
+            }
+        };
 
-  return [captchaRef, execute, response, captchaId];
-};
+        const timerId = setInterval(renderCaptcha, 824);
+    };
 
-const injectGoogleApi = () => {
-  const scriptEl = document.createElement('script');
-
-  scriptEl.src = 'https://www.google.com/recaptcha/api.js';
-  scriptEl.async = true;
-  scriptEl.defer = true;
-
-  document.getElementsByTagName('head')[0].appendChild(scriptEl);
+    return [captchaRef, execute, response, captchaId];
 };
 
 export default useCaptcha;
