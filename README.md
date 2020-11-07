@@ -102,6 +102,7 @@ ________________________________________________________
 | **callback** | [`function`] | Optional. The callback function, executed when the user submits a successful response. The response token is passed to your callback. |
 | **expiredCallback** | [`function`] | Optional. The callback function, executed when the reCAPTCHA response expires and the user needs to re-verify. |
 | **errorCallback** | [`function`] | Optional. The callback function, executed when reCAPTCHA encounters an error (usually network connectivity) and cannot continue until connectivity is restored. If you specify a function here, you are responsible for informing the user that they should retry. |
+| **globally** | [`boolean`] | Optional. [Can I use reCAPTCHA globally?](https://developers.google.com/recaptcha/docs/faq#can-i-use-recaptcha-globally). If set to `true` will be use `www.recaptcha.net` host. Default to `www.google.com`. |
  
  ________________________________________________________
  ________________________________________________________
