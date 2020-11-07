@@ -27,12 +27,11 @@
   "scripts": {
     "clean": "rimraf dist",
     "start": "webpack-dev-server --mode development",
-    "build-package": "npm run clean && npm run transpile-css && npm run transpile-js",
+    "build-package": "npm run clean && npm run transpile-js",
     "build-example": "webpack --mode production",
     "deploy": "gh-pages -d example/dist",
     "publish-npm": "npm run build-package && npm publish",
     "publish-git": "npm run build-package && npm run build-example && npm run deploy",
-    "transpile-css": "postcss src/style.css --no-map --output=dist/style.css",
     "transpile-js": "babel src/**/*.js -d dist --copy-files"
   },
   "repository": {
