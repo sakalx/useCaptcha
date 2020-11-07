@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import useCaptcha from '../../dist/';
+import useCaptcha from '../../src/';
 
 import './style.css';
 
